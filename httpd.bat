@@ -6,7 +6,6 @@ set LIBXML2_VERSION=
 set NASM_VERSION=2.16.03
 set BASEDIR=%CD%
 
-goto next
 curl -o nasm.zip https://www.nasm.us/pub/nasm/releasebuilds/%NASM_VERSION%/win64/nasm-%NASM_VERSION%-win64.zip
 powershell Expand-Archive nasm.zip -DestinationPath .
 
@@ -91,12 +90,9 @@ cmake -G "Visual Studio 17 2022" ^
 MSBuild INSTALL.vcxproj -t:build -p:Configuration=Release
 
 git clone https://github.com/apache/httpd.git
-:next
-call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64
 rmdir /s /q httpd-build
 mkdir httpd-build
 cd httpd-build
-call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64
 cmake -G "Visual Studio 17 2022" ^
 -DAPR_INCLUDE_DIR=C:/APR/include ^
 -DAPR_LIBRARIES=C:/APR/lib/libapr-1.lib;C:/APR/lib/libaprapp-1.lib;C:/APR/lib/apr_ldap-1.lib;C:/APR/lib/libaprutil-1.lib ^
